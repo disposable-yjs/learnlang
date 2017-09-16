@@ -1,0 +1,34 @@
+{
+  "name": "learnlang",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "eventemitter2": "^4.1.2",
+    "jquery": "^3.2.1",
+    "pixi.js": "^4.5.4"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015": "^6.24.1",
+    "browser-sync": "^2.18.12",
+    "css-loader": "^0.28.4",
+    "gulp": "^3.9.1",
+    "gulp-plumber": "^1.1.0",
+    "html-loader": "^0.4.5",
+    "inquirer": "^3.2.3",
+    "node-sass": "^4.5.3",
+    "run-sequence": "^1.2.2",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.0.0",
+    "webpack-stream": "^3.2.0"
+  },
+  "scripts": {
+    "start": "./node_modules/gulp/bin/gulp.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
