@@ -1,14 +1,21 @@
 const pixi = require("pixi.js");
-const learn = require("../js/param")
 const game = require("../js/game");
 const app = game.app
 const storage = require("../js/storage")
+const Button = require("../js/button.js")
+
+const vWidth = game.app.renderer.width;
+const vHeight = game.app.renderer.height;
+const portrait = vWidth<=vHeight;
+const landscape = vWidth>vHeight;
+
+const margin = 50
 
 module.exports =exports = new (require("../js/sceneManager").Scene)();
 exports.on("start",(sce,correctCount,second)=>{
   let scoreBk=new pixi.Graphics();
-  scoreBk.beginFill(0x5d3008,1);
-  scoreBk.drawRect(learn.scoreBkMargin,learn.scoreBkMargin,app.renderer.width-2*learn.scoreBkMargin,app.renderer.height-2*learn.scoreBkMargin);
+  scoreBk.beginFill(0x724f0a,1);
+  scoreBk.drawRoundedRect(margin,margin,vWidth-2*margin,vHeight-2*margin,margin);
   scoreBk.endFill();
   sce.container.addChild(scoreBk);
   const thisScore=(correctCount*correctCount*5/second)|0;
@@ -16,16 +23,15 @@ exports.on("start",(sce,correctCount,second)=>{
   storage.set("score",total);
   let tTime=0,tAns=0,tScore=0,tTS=0;
   
-  let scoreText=new pixi.Text(
-    `Time:
-Answered:
-
-Score:
-Total Score:
-`,{wordWrap:true,wordWrapWidth:app.renderer.width-2*learn.scoreBkMargin,breakWords:true,fontSize:20*learn.fontScale,fill:0xffffff}
+  let scoreText=new pixi.Text("Result",{
+    wordWrap:true,
+    wordWrapWidth:vWidth-2*margin,
+    breakWords:true,
+    fontSize:vWidth/20,
+    fill:0xffffff}
   );
-  scoreText.x=learn.scoreBkMargin;
-  scoreText.y=learn.scoreBkMargin;
+  scoreText.x=2*margin;
+  scoreText.y=2*margin;
   
   sce.container.addChild(scoreText);
   sce.ticker.add(()=>{
@@ -42,31 +48,43 @@ Total Score:${tTS}
 `;
     
   });
-
-  //buttons
-  const re=new pixi.Text("Retry",{fill:0xffffff});
-  re.x=100;re.y=400;
-  let reBtn=new pixi.Graphics();
-  reBtn.beginFill(0x008405,1);
-  reBtn.drawRect(100,400,200,100);
-  reBtn.endFill();
-  sce.container.addChild(reBtn);
-  reBtn.interactive = true;
-  reBtn.on("pointerup",()=>{
+  const buttonWidth=500
+  const buttonHeight=120;
+  (new Button({
+    label:"Back to Stage list",
+    y:vHeight-3*(margin+buttonHeight),
+    x:2*margin,
+    width:buttonWidth,
+    height:buttonHeight,
+    fill: 0x048bcc,
+    fontSize:60
+  },()=>{
     game.sceneManager.getScene("play").refresh()
     game.sceneManager.getScene("stage").start()
-  });
-  sce.container.addChild(re);
-  const galBtn=new pixi.Text("Gallery");
-  galBtn.x=100;galBtn.y=550;
-  let galBtnBtn=new pixi.Graphics();
-  galBtnBtn.beginFill(0xffed66,1);
-  galBtnBtn.drawRect(100,550,200,100);
-  galBtnBtn.endFill();
-  sce.container.addChild(galBtnBtn);
-  galBtnBtn.interactive = true;
-  galBtnBtn.on("pointerup",()=>{
+  })).add(sce.container);
+  (new Button({
+    label:"Retry",
+    y:vHeight-2*(margin+buttonHeight),
+    x:2*margin,
+    width:buttonWidth,
+    height:buttonHeight,
+    fill: 0x50d38f,
+    fontSize:60
+  },()=>{
+    const data = game.sceneManager.getScene("play").lastData;
+    game.sceneManager.getScene("play").refresh()
+    game.sceneManager.getScene("play").start(data)
+  })).add(sce.container); 
+
+  (new Button({
+    label:"Gallery",
+    y:vHeight-margin-buttonHeight,x:2*margin,
+    width:buttonWidth,
+    height:buttonHeight,
+    fill:0xc18b15,
+    fontSize:60
+  },()=>{
     game.sceneManager.getScene("gallery").start().show()
-  });
-  sce.container.addChild(galBtn);
+  })).add(sce.container)
+
 });

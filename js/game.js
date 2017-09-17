@@ -1,10 +1,13 @@
 const pixi = require("pixi.js");
 const storage=require("./storage");
 const $ = require("jquery");
-const canvas = $("canvas#gameCanvas");
+const canvas = exports.canvas=$("canvas#gameCanvas")[0];
+
+require("pixi-richtext")
+
 exports.app=new pixi.Application(window.innerWidth*2,window.innerHeight*2,{
   backgroundColor:0xffffff,
-  view:canvas[0]
+  view:canvas
 });
 //canvas.css({
 //  width:window.innerWidth,
@@ -18,6 +21,7 @@ exports.sceneManager.addScene("play",require("../scene/play.js"));
 exports.sceneManager.addScene("result",require("../scene/result.js"));
 exports.sceneManager.addScene("gallery",require("../scene/gallery.js"));
 exports.sceneManager.addScene("galleryImage",require("../scene/galleryImage.js"));
+exports.sceneManager.addScene("stageInfo",require("../scene/stageInfo.js"));
 
 if (!storage.dev){
   exports.sceneManager.getScene("start").start();

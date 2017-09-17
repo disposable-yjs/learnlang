@@ -1,11 +1,5 @@
 module.exports={
-  blockWidth:window.innerWidth/1.5,
-  blockHeight:window.innerWidth/1.5,
-  blockPadding:5,
-  scoreBkMargin:20,
   textColor:0x000000,
-  scene:{
-    "question":null
-  },
+
   fontScale:window.innerWidth/200
 };

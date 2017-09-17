@@ -9,12 +9,24 @@ module.exports = {
   },
   module: {
     loaders: [
+      { test: /\.svg$/, loader: 'url?mimetype=image/svg+xml&name=[path][name].[ext]' },
+      { test: /\.woff$/, loader: 'url?mimetype=application/font-woff&name=[path][name].[ext]' },
+      { test: /\.woff2$/, loader: 'url?mimetype=application/font-woff2&name=[path][name].[ext]' },
+      { test: /\.[ot]tf$/, loader: 'url?mimetype=application/octet-stream&name=[path][name].[ext]' },
+      { test: /\.eot$/, loader: 'url?mimetype=application/vnd.ms-fontobject&name=[path][name].[ext]' }
+      ,
       { 
         test: /\.js$/, 
-        exclude: /node_modules/, 
+        exclude: /node_modules\/(?!(huozi|pixi-richtext))/, 
         loader: "babel", 
         query:{
-          presets: ['env']
+          presets: ['es2015'],
+          "plugins": [
+            ["transform-runtime", {
+              "polyfill": false,
+              "regenerator": true
+            }]
+          ]
         }
       },
       
@@ -23,10 +35,16 @@ module.exports = {
       {
         test: /\.scss$/,
         loader:"style/useable!css!sass"
-      }
+      },
+      { test: /\.pegjs$/, exclude: /node_modules/, loader: 'pegjs' }
     ]
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin()
+    new webpack.optimize.UglifyJsPlugin({
+      // warningsは圧縮しない
+      compress: {
+        warnings: false
+      }
+    })
   ],
 };

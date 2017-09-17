@@ -10,16 +10,25 @@ exports.on("start",(scene)=>{
   function createList(){
     let htm=``
     for(let v in lst){
-      htm+=`<a class="stage" href="${v}">${v}</a>`
+      htm+=`<div class="stage" data-name="${v}"><a class="label">${v}</a><div class="info"></div><div class="remove"></div></div>`
     }
     stageList.html(htm)
   }
-  stageList.on("click","a.stage",(e)=>{
-    e.preventDefault()
-    game.sceneManager.getScene("play").start(lst[e.target.getAttribute("href")].questions)
-  })
-  
   createList()
+  stageList.on("click",".stage a.label",(e)=>{
+    e.preventDefault()
+    game.sceneManager.getScene("play").start(lst[$(e.target).parent().attr("data-name")].questions)
+  })
+  stageList.on("click",".stage .info",(e)=>{
+    e.preventDefault()
+    game.sceneManager.getScene("stageInfo").start(lst[$(e.target).parent().attr("data-name")])
+  })
+  stageList.on("click",".stage .remove",(e)=>{
+    e.preventDefault()
+    delete lst[$(e.target).parent().attr("data-name")]
+    storage.set("stageList",lst)
+    createList()
+  })
   const addStage=scene.elem.find("#addStage")
   addStage.find("#addBtn").on("click",(e)=>{
     e.preventDefault()
