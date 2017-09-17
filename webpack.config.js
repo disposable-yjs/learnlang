@@ -40,11 +40,11 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      // warningsは圧縮しない
-      compress: {
-        warnings: false
-      }
-    })
+    // new webpack.optimize.UglifyJsPlugin({
+    //   // warningsは圧縮しない
+    //   compress: {
+    //     warnings: false
+    //   }
+    // })
   ],
 };

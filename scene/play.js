@@ -8,11 +8,14 @@ const vHeight = game.app.renderer.height;
 const portrait = vWidth<=vHeight;
 const landscape = vWidth>vHeight;
 
+const fontFamily=["ヒラギノ角ゴシック W2","HiraginoSans-W2","sans-serif"]
+
 const fontScale = vWidth/300
 module.exports =exports = new (require("../js/sceneManager").Scene)();
 exports.on("start",(sce,res)=>{
   let startDate=Date.now();
   let statusBarWidth=0,statusBarHeight=0;
+  let answeredCount=0;
 
   sce.lastData=res
 
@@ -35,18 +38,21 @@ exports.on("start",(sce,res)=>{
   }
   
   let statusBarBg=new pixi.Graphics();
-  statusBarBg.beginFill(0xd6e4ff, 1);
-  statusBarBg.alpha=0.9
-  //statusBar.blendMode=pixi.BLEND_MODES.MULTIPLY
+  statusBarBg.beginFill(0xc9e6ff, 1);
+  statusBarBg.alpha=0.85
+  statusBarBg.blendMode=pixi.BLEND_MODES.LIGHTEN;
   statusBarBg.drawRect(0, 0,statusBarWidth,vWidth*0.5);
   statusBarBg.endFill();
   statusBar.addChild(statusBarBg);
 
-  let timeText = new pixi.Text("00:00",{fontSize:statusBarHeight});
+  let timeText = new pixi.Text("00:00  0正解",{
+    fontSize:statusBarHeight,
+    fontFamily
+  });
   statusBar.addChild(timeText);
   sce.ticker.add(()=>{
     let diff=(Date.now()-startDate)/1000;
-    timeText.text=(((diff/60)|0)+":"+("0"+((diff%60)|0)).slice(-2));
+    timeText.text=(((diff/60)|0)+":"+("0"+((diff%60)|0)).slice(-2))+"  "+answeredCount+"正解";
   });
 
   let qTextContainer = sce.qTextContainer=new pixi.Container();
@@ -63,9 +69,10 @@ exports.on("start",(sce,res)=>{
   
   sce.qText= new RichText("",{
     fontSize:statusBarWidth/20,
+    fontFamily,
     layout:{
       gridSize:statusBarWidth/20,
-      column:25,
+      column:20,
       xInterval:-2,
       yInterval:3,
       letterSpacing:0
@@ -93,7 +100,9 @@ exports.on("start",(sce,res)=>{
     let qBtnBk = new pixi.Graphics();
     let bw =qcWidth/3;
     let bh= qcHeight/3;
-    qBtnBk.beginFill(0xFFade1, 1);
+    qBtnBk.beginFill(0xfc855a, 1);
+    qBtnBk.alpha=0.8;
+    qBtnBk.blendMode=pixi.BLEND_MODES.LIGHTEN;
     qBtnBk.drawRoundedRect(10, 10, bw-10, bh-10,30);
     qBtnBk.endFill();  
     
@@ -111,12 +120,14 @@ exports.on("start",(sce,res)=>{
         wordWrap:true,
         wordWrapWidth:bw,
         breakWords:true,
-        fontSize:(bw*bh/3072)|0
+        fontFamily,
+        fontSize:(Math.sqrt(bw*bh)/8)|0 //ブロックの縦と横の相乗平均/１行の文字数という関係式が一番よかった
       }
     );
     qChoiceText.anchor.set(0.5,0.5);
     qChoiceText.x=bw/2;
     qChoiceText.y=bh/2;
+    qChoiceText.blendMode=pixi.BLEND_MODES.NORMAL;
     
     qItm.addChild(qChoiceText);
     if(true){//button click mode
@@ -134,7 +145,6 @@ exports.on("start",(sce,res)=>{
     })
   }
 
-  let answeredCount=0;
   (function loop(){
     let i=(Math.random()*res.length)|0;
     let cor=res[i].answer[0];

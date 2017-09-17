@@ -123,6 +123,7 @@ canvas#gameCanvas{
           line-height:45px;
           vertical-align:middle;
           position: relative;
+          border-bottom: 1px solid rgba(0,0,0,0.5);
           .label{
             vertical-align:middle;
             display: block;
@@ -150,13 +151,14 @@ canvas#gameCanvas{
     }
     #addStage{
         
-        button{
+      button{
+        @include icon-add;
             padding:10px;
             background:#810;
             border:none;
             border-radius:5px;
             color:white;
-            width:100px;
+            width:200px;
             margin:10px;
         }
     }
