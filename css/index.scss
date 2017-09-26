@@ -141,6 +141,19 @@ canvas#gameCanvas{
             height:45px;
             z-index: 2;
             @include icon-info;
+            color:#168BD9;
+          }
+          .remove{
+            vertical-align:middle;
+            display: block;
+            position:absolute;
+            right:45px;
+            top:0;
+            width:45px;
+            height:45px;
+            z-index: 2;
+            @include icon-delete;
+            color:#c00;
           }
         }
     }

@@ -74,10 +74,11 @@ exports.on("start",(sce,res)=>{
       gridSize:statusBarWidth/20,
       column:20,
       xInterval:-2,
-      yInterval:3,
+      yInterval:0,
       letterSpacing:0
   }
   });
+  sce.qText.renderPosition=-15
   qTextContainer.addChild(sce.qText);
 
   let qcWidth=0,qcHeight=0;
