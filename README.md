@@ -7,7 +7,7 @@ This app helps you memorize words,sentences and others.Answer quickly and you ca
 1. clone this repository
 1. `$ cd path/to/learnlang`
 1. `$ npm install`
-1. `$ gulp`
+1. `$ npm start`
 1. launch index.html
 
 ## License

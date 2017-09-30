@@ -7,7 +7,7 @@
 1. このリポジトリをクローン
 1. `$ cd path/to/learnlang`
 1. `$ npm install`
-1. `$ gulp`
+1. `$ npm start`
 1. index.html起動
 
 ## License
