@@ -7,7 +7,7 @@ module.exports =exports = new (require("../js/sceneManager").DomScene)();
 exports.on("start",(scene)=>{
   const gl=scene.elem.html(require("./gallery.html")).find("#galleryList")
   let html ="";
-  window.fetch("https://勉強.ga/learnlang/res/galleryList.json",{
+  window.fetch("https://yuki-js.github.io/learnlang/res/galleryList.json",{
     mode:"cors"
   }).then(req=>req.json()).then(galleryList=>{
     galleryList.items.forEach((v,i)=>{

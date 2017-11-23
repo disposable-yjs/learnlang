@@ -1,4 +1,5 @@
 const webpack = require("webpack")
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 module.exports = {
   context: __dirname ,
   watch:true,
@@ -20,7 +21,7 @@ module.exports = {
         exclude: /node_modules\/(?!(huozi|pixi-richtext))/, 
         loader: "babel", 
         query:{
-          presets: ['es2015'],
+          presets: ['es2015',"stage-0"],
           "plugins": [
             ["transform-runtime", {
               "polyfill": false,
@@ -40,11 +41,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      // warningsは圧縮しない
-      compress: {
-        warnings: false
-      }
-    })
+    new UglifyJsPlugin()
   ],
 };

@@ -124,6 +124,8 @@ canvas#gameCanvas{
           vertical-align:middle;
           position: relative;
           border-bottom: 1px solid rgba(0,0,0,0.5);
+          display:grid;
+          grid-template-columns: 1fr 45px 45px;
           .label{
             vertical-align:middle;
             display: block;
@@ -133,10 +135,8 @@ canvas#gameCanvas{
           }
           .info{
             vertical-align:middle;
+            text-align:center;
             display: block;
-            position:absolute;
-            right:0;
-            top:0;
             width:45px;
             height:45px;
             z-index: 2;
@@ -145,10 +145,8 @@ canvas#gameCanvas{
           }
           .remove{
             vertical-align:middle;
+            text-align:center;
             display: block;
-            position:absolute;
-            right:45px;
-            top:0;
             width:45px;
             height:45px;
             z-index: 2;

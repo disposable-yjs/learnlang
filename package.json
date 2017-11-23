@@ -6,6 +6,7 @@
   "dependencies": {
     "eventemitter2": "^4.1.2",
     "jquery": "^3.2.1",
+    "pixi-richtext": "^1.0.11",
     "pixi.js": "^4.5.4"
   },
   "devDependencies": {
@@ -25,6 +26,7 @@
     "run-sequence": "^1.2.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
+    "uglifyjs-webpack-plugin": "^1.1.0",
     "url-loader": "^0.5.9",
     "webpack": "^3.0.0",
     "webpack-stream": "^3.2.0"
