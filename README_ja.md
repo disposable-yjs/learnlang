@@ -10,6 +10,12 @@
 1. `$ npm start`
 1. index.html起動
 
-## License
-MIT
+## ライセンス
+### ソースコード
+ソースコードのライセンスはMITライセンスです。
 Copyright (c) 2017 yuki-js
+### 写真(res/ ディレクトリ以下)
+
+
+![https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png](クリエイティブ・コモンズ・ライセンス)
+この 作品 は クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際 ライセンスの下に提供されています。
